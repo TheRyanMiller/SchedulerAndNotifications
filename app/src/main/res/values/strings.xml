@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Scheduler and Notifications</string>
+    <string name="error_preferences_illegal_state">illegalexception</string>
 </resources>
