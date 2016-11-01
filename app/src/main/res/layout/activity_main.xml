@@ -10,15 +10,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.rtmillerprojects.schedulerandnotifications.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
 
     <Button
+        android:id="@+id/jobservice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LAUNCH JOB"
         android:onClick="jobMethod"
         />
+    <Button
+        android:layout_below="@+id/jobservice"
+        android:id="@+id/alarmservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LAUNCH ALARM"
+        android:onClick="alarmMethod"
+        />
+    <Button
+        android:id="@+id/killalarm"
+        android:layout_below="@+id/alarmservice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KILL ALARM"
+        android:onClick="killAlarm"
+        />
+    <Switch
+        android:id="@+id/myswitch"
+        android:layout_below="@+id/killalarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>

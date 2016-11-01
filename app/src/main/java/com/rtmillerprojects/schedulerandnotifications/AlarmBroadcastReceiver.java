@@ -26,7 +26,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         long longDate = extras.getLong("longdate");
 
         Date date=new Date(longDate);
-        SimpleDateFormat df2 = new SimpleDateFormat("MM/dd/yy");
+        SimpleDateFormat df2 = new SimpleDateFormat("MM-dd HH:mm:ss");
         String dateText = df2.format(date);
 
         SharedPrefHelper.putStringPreference("update "+i+": ",dateText);
@@ -34,7 +34,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         Date now = new Date();
         long lDate = now.getTime();
 
-        Toast.makeText(context, "Alarm "+i+" received with date of: "+dateText, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Alarm "+i+"  "+dateText, Toast.LENGTH_LONG).show();
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(ALARM_SERVICE);
 

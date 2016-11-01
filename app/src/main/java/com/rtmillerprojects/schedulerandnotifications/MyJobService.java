@@ -6,6 +6,7 @@ import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -13,14 +14,20 @@ import android.widget.Toast;
  */
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class MyJobService extends JobService {
+
     private UpdateAppsAsyncTask updateTask = new UpdateAppsAsyncTask();
 
     @Override
     public boolean onStartJob(JobParameters params) {
         // Note: this is preformed on the main thread.
+        updateTask.execute(params);
+        if(SharedPrefHelper.getBoolean("switch",false)){
+            Toast.makeText(this, "SWITCH IS ACTIVATED", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "SWITCH IS DE-ACTIVATED", Toast.LENGTH_SHORT).show();
+        }
 
-        //updateTask.execute(params);
-        Toast.makeText(this, "JOB TOAST", Toast.LENGTH_SHORT).show();
         return false;
     }
 
@@ -29,22 +36,23 @@ public class MyJobService extends JobService {
     @Override
     public boolean onStopJob(JobParameters params) {
         // Note: return true to reschedule this job.
+        Toast.makeText(this, "STOP JOB TOAST", Toast.LENGTH_SHORT).show();
+        boolean shouldReschedule = updateTask.stopJob(params);
 
-        //boolean shouldReschedule = updateTask.stopJob(params);
 
-        //return shouldReschedule;
-        return true;
+        return shouldReschedule;
+        //return true;
     }
 
 
     private class UpdateAppsAsyncTask extends AsyncTask<JobParameters, Void, JobParameters[]> {
 
-
         @Override
         protected JobParameters[] doInBackground(JobParameters... params) {
-
-
             // Do updating and stopping logical here.
+            Log.d("log","JOB RUN");
+            if(SharedPrefHelper.getBoolean("switch",false)){
+            }
             return params;
         }
 
