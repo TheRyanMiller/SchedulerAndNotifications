@@ -34,9 +34,17 @@
         android:text="KILL ALARM"
         android:onClick="killAlarm"
         />
+    <Button
+        android:id="@+id/killjob"
+        android:layout_below="@+id/killalarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="KILL ALL JOBS"
+        android:onClick="killJob"
+        />
     <Switch
         android:id="@+id/myswitch"
-        android:layout_below="@+id/killalarm"
+        android:layout_below="@+id/killjob"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

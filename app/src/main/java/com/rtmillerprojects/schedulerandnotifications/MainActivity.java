@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mySwitch = (Switch) findViewById(R.id.myswitch);
 
+        mySwitch.setChecked(SharedPrefHelper.getBoolean("switch",false));
         mySwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public void jobMethod(View v){
 
         ComponentName mServiceComponent = new ComponentName(this, MyJobService.class);
-        JobInfo.Builder builder = new JobInfo.Builder(kJobId++, mServiceComponent);
+        JobInfo.Builder builder = new JobInfo.Builder(kJobId, mServiceComponent);
         //builder.setMinimumLatency(0); // wait at least
         //builder.setOverrideDeadline(1 * 1000); // maximum delay
         builder.setPeriodic(5000);
@@ -83,6 +84,17 @@ public class MainActivity extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,  newIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.cancel(pendingIntent);
+
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void killJob(View v){
+        JobScheduler jobScheduler = (JobScheduler) getApplication().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+        jobScheduler.cancel(kJobId);
+        for (JobInfo ji : jobScheduler.getAllPendingJobs()) {
+            int id = ji.getId();
+            jobScheduler.cancel(id);
+        }
 
     }
 
