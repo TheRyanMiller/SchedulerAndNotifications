@@ -30,6 +30,9 @@ public class MyJobService extends JobService {
     public boolean onStartJob(JobParameters params) {
         nm =(NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
 
+        Intent intent = new Intent(this, SomeClassThatExtendsIntentService.class);
+            //In SomeClass... onHandleIntent do background calls
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
